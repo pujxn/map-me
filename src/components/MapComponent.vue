@@ -6,9 +6,9 @@
 
 <script setup>
 import "leaflet/dist/leaflet.css";
-import "@sjaakp/leaflet-search";
 import L, { map } from "leaflet";
 import { onMounted, onUpdated, ref } from "vue";
+import "@sjaakp/leaflet-search/dist/leaflet-search"
 
 const props = defineProps(["latitude", "longitude", "placeName", "placeDesc"]);
 const myMap = ref();
@@ -33,6 +33,7 @@ const setupMap = (myMap, marker, tooltip) => {
     tooltip.value = L.tooltip();
     tooltip.value.setContent(generateTooltipText());
     marker.value.bindTooltip(tooltip.value);
+    myMap.value.addControl(L.control.search())
 }
 
 
