@@ -1,10 +1,11 @@
 <script setup>
-import HelloWorld from '@/components/HelloWorld.vue';
-import JSMapComponent from '@/components/MapComponent.vue';
+import DisplayLogic from '@/components/DisplayLogic.vue';
 </script>
 
 <template>
-  <HelloWorld />
+  <!-- <HelloWorld /> -->
+  <DisplayLogic />
+  <!-- <MapComponent /> -->
 </template>
 
 <style scoped></style>
