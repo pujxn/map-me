@@ -6,16 +6,24 @@
 
 <script setup>
 import "leaflet/dist/leaflet.css";
+import "@sjaakp/leaflet-search";
 import L, { map } from "leaflet";
 import { onMounted, onUpdated, ref } from "vue";
 
-const props = defineProps(["latitude", "longitude"]);
+const props = defineProps(["latitude", "longitude", "placeName", "placeDesc"]);
 const myMap = ref();
 const marker = ref();
 const tooltip = ref();
 
-const setupMap = (myMap) => {
-    myMap.value = L.map("mapContainer", { zoomAnimation: false, scrollWheelZoom: false }).setView([props.latitude, props.longitude], 13);
+const generateTooltipText = () => {
+    return `Lat, Lng: ${props.latitude}, ${props.longitude}<br />
+    Name: ${props.placeName}<br />
+    Desc: ${props.placeDesc}`
+}
+
+
+const setupMap = (myMap, marker, tooltip) => {
+    myMap.value = L.map("mapContainer").setView([props.latitude, props.longitude], 13);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -23,22 +31,28 @@ const setupMap = (myMap) => {
     marker.value = L.marker([props.latitude, props.longitude]);
     marker.value.addTo(myMap.value);
     tooltip.value = L.tooltip();
-    tooltip.value.setContent(`${props.latitude}, ${props.longitude}`)
+    tooltip.value.setContent(generateTooltipText());
     marker.value.bindTooltip(tooltip.value);
+}
+
+
+const updateMap = (myMap, marker, tooltip) => {
+    myMap.value.panTo([props.latitude, props.longitude]);
+    marker.value.setLatLng([props.latitude, props.longitude]);
+    tooltip.value.setContent(generateTooltipText());
 }
 
 
 onMounted(() => {
     console.log("Mounted");
-    setupMap(myMap);
+    setupMap(myMap, marker, tooltip);
 })
 
 
 onUpdated(() => {
     console.log("Updated");
-    myMap.value.panTo([props.latitude, props.longitude]);
-    marker.value.setLatLng([props.latitude, props.longitude]);
-    tooltip.value.setContent(`${props.latitude}, ${props.longitude}`)
+    updateMap(myMap, marker, tooltip);
+
 })
 
 </script>
