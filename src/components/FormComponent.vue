@@ -29,23 +29,27 @@ const isLongError = () => {
 </script>
 
 <template>
-    <form id="userForm">
-        <input v-model.number="latVal" @change="isLatError" />
-        <span v-if="isLatError()">Latitude values can only be a number
-            between -90
-            and 90</span>
-        <input v-model.number="longVal" />
-        <span v-if="isLongError()">Longitude values can only be between -180 and 179.99</span>
-        <input v-model.lazy="placeNameVal" />
-        <input v-model.lazy="placeDescVal" />
-        <button :disabled="isLatError() || isLongError()" @click="e => {
-            e.preventDefault();
-            $emit('formChanged', [latVal.toFixed(2), longVal.toFixed(2), placeNameVal, placeDescVal])
-        }">
-            Click
-        </button>
-    </form>
+    <div class="h-full flex flex-col items-center justify-center">
+        <div>
+            <form id="userForm">
+                <input v-model.number="latVal" @change="isLatError" />
+                <span v-if="isLatError()">Latitude values can only be a number between -90 and 90</span>
+                <input v-model.number="longVal" />
+                <span v-if="isLongError()">Longitude values can only be between -180 and 179.99</span>
+                <input v-model.lazy="placeNameVal" />
+                <input v-model.lazy="placeDescVal" />
+            </form>
+        </div>
+        <div>
+            <button :disabled="isLatError() || isLongError()" @click="e => {
+                e.preventDefault();
+                $emit('formChanged', [latVal.toFixed(2), longVal.toFixed(2), placeNameVal, placeDescVal])
+            }">
+                Click
+            </button>
+        </div>
 
-    <h2>{{ latitude }}</h2>
-    <h2>{{ longitude }}</h2>
+        <h2 class="text-red-600">{{ latitude }}</h2>
+        <h2>{{ longitude }}</h2>
+    </div>
 </template>

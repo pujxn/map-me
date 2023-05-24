@@ -1,6 +1,6 @@
 <template>
-    <div id="container">
-        <div id="mapContainer"></div>
+    <div id="container" class="h-full">
+        <div id="mapContainer" class="h-full"></div>
     </div>
 </template>
 
@@ -66,8 +66,8 @@ onUpdated(() => {
 
 </script>
 
-<style scoped>
+<!-- <style scoped>
 #mapContainer {
     height: 500px;
 }
-</style>
+</style> -->

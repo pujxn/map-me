@@ -3,9 +3,9 @@ import DisplayLogic from '@/components/DisplayLogic.vue';
 </script>
 
 <template>
-  <!-- <HelloWorld /> -->
-  <DisplayLogic />
-  <!-- <MapComponent /> -->
+  <div>
+    <DisplayLogic />
+  </div>
 </template>
 
 <style scoped></style>

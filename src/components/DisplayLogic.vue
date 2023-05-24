@@ -1,11 +1,18 @@
 <template>
-    <FormComponent :latitude="latitude" :longitude="longitude" :placeName="placeName" :placeDesc="placeDesc" @formChanged="(newVal) => {
-        latitude = newVal[0];
-        longitude = newVal[1];
-        placeName = newVal[2];
-        placeDesc = newVal[3];
-    }" />
-    <MapComponent :latitude="latitude" :longitude="longitude" :placeName="placeName" :placeDesc="placeDesc" />
+    <div class="flex flex-col bg-white h-screen">
+        <div class="h-1/2">
+            <MapComponent :latitude="latitude" :longitude="longitude" :placeName="placeName" :placeDesc="placeDesc" />
+        </div>
+        <div class="bg-red-400 h-1/2">
+            <FormComponent :latitude="latitude" :longitude="longitude" :placeName="placeName" :placeDesc="placeDesc"
+                @formChanged="(newVal) => {
+                    latitude = newVal[0];
+                    longitude = newVal[1];
+                    placeName = newVal[2];
+                    placeDesc = newVal[3];
+                }" />
+        </div>
+    </div>
 </template>
 
 <script setup>
