@@ -9,6 +9,7 @@ import "leaflet/dist/leaflet.css";
 import L, { map } from "leaflet";
 import { onMounted, onUpdated, ref } from "vue";
 import "@sjaakp/leaflet-search/dist/leaflet-search"
+import "leaflet/dist/images/marker-shadow.png";
 
 const props = defineProps(["latitude", "longitude", "placeName", "placeDesc"]);
 const myMap = ref();
