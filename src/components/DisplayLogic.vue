@@ -1,9 +1,9 @@
 <template>
-    <div class="flex flex-col bg-white h-screen">
+    <div class="flex flex-col h-screen">
         <div class="h-1/2">
             <MapComponent :latitude="latitude" :longitude="longitude" :placeName="placeName" :placeDesc="placeDesc" />
         </div>
-        <div class="bg-red-400 h-1/2">
+        <div class="h-1/2">
             <FormComponent :latitude="latitude" :longitude="longitude" :placeName="placeName" :placeDesc="placeDesc"
                 @formChanged="(newVal) => {
                     latitude = newVal[0];
