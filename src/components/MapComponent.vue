@@ -6,10 +6,15 @@
 
 <script setup>
 import "leaflet/dist/leaflet.css";
-import L, { map } from "leaflet";
+import L, { map, icon } from "leaflet";
 import { onMounted, onUpdated, ref } from "vue";
 import "@sjaakp/leaflet-search/dist/leaflet-search"
-import "leaflet/dist/images/marker-shadow.png";
+
+// const ICON = icon({
+//     iconURL: "@/assets/marker-icon.png",
+//     iconSize: [32, 32]
+// })
+
 
 const props = defineProps(["latitude", "longitude", "placeName", "placeDesc"]);
 const myMap = ref();
@@ -32,7 +37,7 @@ const setupMap = (myMap, marker, tooltip, searchControl) => {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(myMap.value);
 
-    marker.value = L.marker([51.05, -0.09]);
+    marker.value = L.marker([51.05, -0.09], { iconURL: "@/assets/marker-icon.png" });
     marker.value.addTo(myMap.value);
 
     tooltip.value = L.tooltip();
