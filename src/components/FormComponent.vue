@@ -7,7 +7,7 @@ const placeNameVal = ref(props.placeName);
 const placeDescVal = ref(props.placeDesc);
 
 const isLatError = () => {
-    if (latVal.value >= -90 && latVal.value <= 90 && latVal.value) {
+    if (latVal.value >= -90 && latVal.value <= 90 && typeof latVal.value != "string") {
         return false;
     }
     else {
@@ -17,7 +17,7 @@ const isLatError = () => {
 
 const isLongError = () => {
 
-    if (longVal.value >= -180 && longVal.value < 180 && longVal.value) {
+    if (longVal.value >= -180 && longVal.value < 180 && typeof longVal.value != "string") {
         return false;
     }
     else {
@@ -40,7 +40,7 @@ const isLongError = () => {
         <input v-model.lazy="placeDescVal" />
         <button :disabled="isLatError() || isLongError()" @click="e => {
             e.preventDefault();
-            $emit('formChanged', [latVal, longVal, placeNameVal, placeDescVal])
+            $emit('formChanged', [latVal.toFixed(2), longVal.toFixed(2), placeNameVal, placeDescVal])
         }">
             Click
         </button>
