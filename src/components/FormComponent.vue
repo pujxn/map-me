@@ -7,7 +7,7 @@ const placeNameVal = ref(props.placeName);
 const placeDescVal = ref(props.placeDesc);
 
 const isLatError = () => {
-    if (latVal.value >= -90 && latVal.value <= 90 && typeof latVal.value != "string") { //Takes care that the field is not empty and within permissible latitude bounds
+    if (latVal.value >= -90 && latVal.value <= 90 && typeof latVal.value != "string") { //Takes care that the field is within permissible latitude bounds
         return false;
     }
     else {
@@ -17,7 +17,7 @@ const isLatError = () => {
 
 const isLongError = () => {
 
-    if (longVal.value >= -180 && longVal.value < 180 && typeof longVal.value != "string") { //Takes care that the field is not empty and within permissible longitude bounds
+    if (longVal.value >= -180 && longVal.value < 180 && typeof longVal.value != "string") { //Takes care that the field is within permissible longitude bounds
         return false;
     }
     else {
@@ -25,36 +25,52 @@ const isLongError = () => {
     }
 }
 
+const allFieldsFilled = () => {
+    if (placeNameVal.value && placeDescVal.value) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 
 </script>
 
 <template>
-    <div class="h-full flex flex-col items-center justify-center">
-        <div>
-            <form id="userForm" class="flex flex-col space-y-2 border-4 border-red-400 p-4">
-                <label class="text-light-orange font-bold">Latitude:<br /><input class="text-black font-normal"
-                        v-model.number="latVal" /></label>
-                <span class="material-icons">error</span><span v-if="isLatError()">Latitude must be a number between -90 and
-                    90</span>
-                <label class="text-light-orange font-bold">Longitude:<br /><input class="text-black font-normal"
-                        v-model.number="longVal" /></label>
-                <span class="text-red-400" v-if="isLongError()">Longitude must be a number between -180 and 179.99</span>
-                <label class="text-light-orange font-bold">Place name:<br /><input class="text-black font-normal"
-                        v-model.lazy="placeNameVal" /></label>
-                <label class="text-light-orange font-bold">Place description:<br /><input class="text-black font-normal"
-                        v-model.lazy="placeDescVal" /></label>
+    <div class="mt-8 flex flex-col items-center justify-center">
+        <div class="w-80">
+            <form id="userForm" class="flex flex-col space-y-2 border-4 border-light-orange p-4">
+                <label class="text-light-orange font-bold">Latitude:<br /><input class="text-black font-normal w-full"
+                        v-model.number="latVal" placeholder="Enter Latitude" /></label>
+                <div v-if="isLatError()" class="text-red-400 text-sm">
+                    <span class="material-icons inline-block align-middle">error</span><span>Latitude must be a number
+                        between -90
+                        and 90</span>
+                </div>
+
+                <label class="text-light-orange font-bold">Longitude:<br /><input class="text-black font-normal w-full"
+                        v-model.number="longVal" placeholder="Enter Longitude" /></label>
+                <div v-if="isLongError()" class="text-red-400 text-sm">
+                    <span class="material-icons inline-block align-middle">error</span><span class="text-red-400">Longitude
+                        must be a number between -180 and 179.99</span>
+                </div>
+                <label class="text-light-orange font-bold">Place name:<br /><input class="text-black font-normal w-full"
+                        v-model="placeNameVal" required placeholder="Enter Name" /></label>
+                <label class="text-light-orange font-bold">Place description:<br /><input
+                        class="text-black font-normal w-full" v-model="placeDescVal" required
+                        placeholder="Enter description" /></label>
             </form>
         </div>
-        <div>
-            <button class="bg-red-400" :disabled="isLatError() || isLongError()" @click="e => {
-                e.preventDefault();
-                $emit('formChanged', [latVal.toFixed(2), longVal.toFixed(2), placeNameVal, placeDescVal])
-            }">
-                Click
+        <div class="mt-4 w-content border-4 border-light-orange drop-shadow-sm">
+            <button
+                class="font-semibold disabled:bg-light-grey disabled:text-deep-purple w-32 bg-deep-purple hover:bg-light-orange text-light-orange hover:text-deep-purple"
+                :disabled="isLatError() || isLongError() || !allFieldsFilled()" @click="e => {
+                    e.preventDefault();
+                    $emit('formChanged', [latVal.toFixed(2), longVal.toFixed(2), placeNameVal, placeDescVal])
+                }" form="userForm" type="submit">
+                Let's travel!
             </button>
         </div>
-
-        <h2 class="text-red-600">{{ latitude }}</h2>
-        <h2>{{ longitude }}</h2>
     </div>
 </template>

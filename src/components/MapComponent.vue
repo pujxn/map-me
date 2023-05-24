@@ -25,17 +25,19 @@ const generateTooltipText = () => {
 
 const setupMap = (myMap, marker, tooltip, searchControl) => {
 
-    myMap.value = L.map("mapContainer").setView([props.latitude, props.longitude], 13);
+    myMap.value = L.map("mapContainer").setView([51.05, -0.09], 13);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(myMap.value);
 
-    marker.value = L.marker([props.latitude, props.longitude]);
+    marker.value = L.marker([51.05, -0.09]);
     marker.value.addTo(myMap.value);
 
     tooltip.value = L.tooltip();
-    tooltip.value.setContent(generateTooltipText());
+    tooltip.value.setContent(`Lat, Lng: 51.05, -0.09<br />
+    Name: London<br />
+    Desc: A beautiful city in England`);
 
     marker.value.bindTooltip(tooltip.value);
     marker.value.on("mouseover", function (e) { (tooltip.value.close()) })
