@@ -14,6 +14,7 @@ const props = defineProps(["latitude", "longitude", "placeName", "placeDesc"]);
 const myMap = ref();
 const marker = ref();
 const tooltip = ref();
+const searchControl = ref();
 
 const generateTooltipText = () => {
     return `Lat, Lng: ${props.latitude}, ${props.longitude}<br />
@@ -22,7 +23,7 @@ const generateTooltipText = () => {
 }
 
 
-const setupMap = (myMap, marker, tooltip) => {
+const setupMap = (myMap, marker, tooltip, searchControl) => {
     myMap.value = L.map("mapContainer").setView([props.latitude, props.longitude], 13);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -33,7 +34,8 @@ const setupMap = (myMap, marker, tooltip) => {
     tooltip.value = L.tooltip();
     tooltip.value.setContent(generateTooltipText());
     marker.value.bindTooltip(tooltip.value);
-    myMap.value.addControl(L.control.search())
+    searchControl.value = L.control.search();
+    searchControl.value.addTo(myMap.value);
 }
 
 
@@ -46,7 +48,7 @@ const updateMap = (myMap, marker, tooltip) => {
 
 onMounted(() => {
     console.log("Mounted");
-    setupMap(myMap, marker, tooltip);
+    setupMap(myMap, marker, tooltip, searchControl);
 })
 
 
