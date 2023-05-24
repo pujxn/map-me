@@ -31,6 +31,15 @@ const generateTooltipText = () => {
 
 const setupMap = (myMap, marker, tooltip, searchControl) => {
 
+    delete L.Icon.Default.prototype._getIconUrl;
+
+    L.Icon.Default.mergeOptions({
+        iconRetinaUrl: ('src/assets/marker-icon-2x.png'),
+        iconUrl: ('src/assets/marker-icon.png'),
+        shadowUrl: ('src/assets/marker-shadow.png')
+    });
+
+
     myMap.value = L.map("mapContainer").setView([51.05, -0.09], 13);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
