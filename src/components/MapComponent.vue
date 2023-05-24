@@ -9,6 +9,7 @@ import "leaflet/dist/leaflet.css";
 import L, { map, icon } from "leaflet";
 import { onMounted, onUpdated, ref } from "vue";
 import "@sjaakp/leaflet-search/dist/leaflet-search"
+import * as markerImg from "@/assets/marker-icon.png"
 
 // const ICON = icon({
 //     iconURL: "@/assets/marker-icon.png",
@@ -35,7 +36,7 @@ const setupMap = (myMap, marker, tooltip, searchControl) => {
 
     L.Icon.Default.mergeOptions({
         iconRetinaUrl: ('src/assets/marker-icon-2x.png'),
-        iconUrl: ('src/assets/marker-icon.png'),
+        iconUrl: markerImg,
         shadowUrl: ('src/assets/marker-shadow.png')
     });
 
@@ -46,7 +47,7 @@ const setupMap = (myMap, marker, tooltip, searchControl) => {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(myMap.value);
 
-    marker.value = L.marker([51.05, -0.09], { iconURL: "@/assets/marker-icon.png" });
+    marker.value = L.marker([51.05, -0.09]);
     marker.value.addTo(myMap.value);
 
     tooltip.value = L.tooltip();
