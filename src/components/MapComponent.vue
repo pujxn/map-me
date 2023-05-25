@@ -30,7 +30,7 @@ const setupMap = (myMap, marker, tooltip, searchControl) => {
     const greenIcon = L.icon({
         // iconUrl: 'https://w7.pngwing.com/pngs/731/25/png-transparent-location-icon-computer-icons-google-map-maker-marker-pen-cartodb-map-marker-heart-logo-color-thumbnail.png',
         // shadowUrl: 'leaf-shadow.png',
-        iconUrl: "src/map-marker.png",
+        iconUrl: "https://i.postimg.cc/66h2h3Kz/map-marker.png",
         iconSize: [50, 50], // size of the icon
         shadowSize: [50, 64], // size of the shadow
         iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
