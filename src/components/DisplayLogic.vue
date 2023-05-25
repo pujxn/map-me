@@ -19,10 +19,6 @@
 import FormComponent from "@/components/FormComponent.vue"
 import MapComponent from "@/components/MapComponent.vue"
 import { ref } from "vue"
-// const latitude = ref(51.05);
-// const longitude = ref(-0.09);
-// const placeName = ref("My favorite place");
-// const placeDesc = ref("About my favorite place");
 
 const latitude = ref();
 const longitude = ref();
